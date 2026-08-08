@@ -26,6 +26,64 @@ internal class Program
         // => You write the code once in the parent class and reuse it in all child classes.
         #endregion
 
+        #region Question3
+        DeliveryCenter center = new DeliveryCenter();
+
+        Console.WriteLine("Enter Delivery Center Name:");
+        center.CenterName = Console.ReadLine();
+
+        DeliveryAddress defaultAddress = new DeliveryAddress("Cairo", "Tahrir", 1);
+
+        Console.WriteLine();
+
+        center.AddShipment(new StandardShipment("SH001", "Laptop", 3m, 80m, defaultAddress));
+        Console.WriteLine("Shipment Added Successfully.");
+
+        center.AddShipment(new ExpressShipment("SH002", "Mobile Phone", 2m, 60m, defaultAddress, 30m));
+        Console.WriteLine("Shipment Added Successfully.");
+
+        center.AddShipment(new InternationalShipment("SH003", "Television", 8m, 120m, defaultAddress, "Germany", 100m));
+        Console.WriteLine("Shipment Added Successfully.");
+        Console.WriteLine();
+
+        Console.WriteLine("==================================================");
+        Console.WriteLine($"Delivery Center : {center.CenterName}");
+        Console.WriteLine("==================================================");
+
+        for (int i = 0; i < 20; i++)
+        {
+            if (center[i] != null)
+            {
+                center[i].PrintShipment(); 
+                Console.WriteLine("--------------------------------------------------");
+            }
+        }
+
+        Console.WriteLine("\nEnter Tracking Code to Remove:");
+        string codeToRemove = Console.ReadLine();
+
+        if (center.RemoveShipment(codeToRemove))
+        {
+            Console.WriteLine("\nShipment Removed Successfully.\n");
+        }
+
+        Console.WriteLine("==================================================");
+        Console.WriteLine("Remaining Shipments");
+        Console.WriteLine("==================================================");
+
+        for (int i = 0; i < 20; i++)
+        {
+            if (center[i] != null)
+            {
+                center[i].PrintShipment();
+                Console.WriteLine("...");
+            }
+        }
+
+        Console.ReadLine();
+
+        #endregion
+
     }
 }
 
